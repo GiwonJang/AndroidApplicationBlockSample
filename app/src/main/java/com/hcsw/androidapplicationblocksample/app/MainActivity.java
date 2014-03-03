@@ -2,9 +2,9 @@ package com.hcsw.androidapplicationblocksample.app;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.EActivity;
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
@@ -32,7 +35,7 @@ public class MainActivity extends ActionBarActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
 				getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -62,14 +65,11 @@ public class MainActivity extends ActionBarActivity
 						.commit();
 				break;
 		}
-
-
-
 	}
 
 	public void onSectionAttached(int number)
 	{
-		mTitle = getResources().getStringArray(R.array.side_menu_titles)[number-1];
+		mTitle = getResources().getStringArray(R.array.side_menu_titles)[number - 1];
 	}
 
 	public void restoreActionBar()
