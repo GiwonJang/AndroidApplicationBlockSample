@@ -15,9 +15,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import org.androidannotations.annotations.EFragment;
+
 /**
  * Created by gwjang on 2014. 2. 27..
  */
+@EFragment
 public class VolleySampleFragment extends Fragment
 {
 	/**
