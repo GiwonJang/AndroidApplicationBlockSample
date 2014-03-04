@@ -14,17 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.FragmentById;
-
-@EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
 	 */
-	@FragmentById(R.id.navigation_drawer)
 	NavigationDrawerFragment mNavigationDrawerFragment;
 
 	/**
@@ -35,10 +30,10 @@ public class MainActivity extends ActionBarActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);
 
-		//mNavigationDrawerFragment = (NavigationDrawerFragment)
-		//		getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+		mNavigationDrawerFragment = (NavigationDrawerFragment)
+				getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
 
 		// Set up the drawer.

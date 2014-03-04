@@ -15,14 +15,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import org.androidannotations.annotations.EFragment;
-
 /**
  * Created by gwjang on 2014. 2. 27..
  */
-@EFragment
-public class VolleySampleFragment extends Fragment
-{
+public class VolleySampleFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -38,8 +34,7 @@ public class VolleySampleFragment extends Fragment
 	 * Returns a new instance of this fragment for the given section
 	 * number.
 	 */
-	public static VolleySampleFragment newInstance(int sectionNumber)
-	{
+	public static VolleySampleFragment newInstance(int sectionNumber) {
 		VolleySampleFragment fragment = new VolleySampleFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -47,14 +42,12 @@ public class VolleySampleFragment extends Fragment
 		return fragment;
 	}
 
-	public VolleySampleFragment()
-	{
+	public VolleySampleFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState)
-	{
+	                         Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 		TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 		textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -67,20 +60,16 @@ public class VolleySampleFragment extends Fragment
 						SAMPLE_IMAGE_REQ_URL,
 						SampleImage.class,
 						null,
-						new Response.Listener<SampleImage>()
-						{
-							public void onResponse(SampleImage response)
-							{
+						new Response.Listener<SampleImage>() {
+							public void onResponse(SampleImage response) {
 								Log.i(TAG, response.getTitle());
 								//appendItemToList(response.items);
 								//notifyDataSetChanged();
 							}
 						},
-						new Response.ErrorListener()
-						{
+						new Response.ErrorListener() {
 							@Override
-							public void onErrorResponse(VolleyError volleyError)
-							{
+							public void onErrorResponse(VolleyError volleyError) {
 								Log.e(TAG, volleyError.getMessage(), volleyError);
 							}
 						}
@@ -90,16 +79,14 @@ public class VolleySampleFragment extends Fragment
 	}
 
 	@Override
-	public void onAttach(Activity activity)
-	{
+	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		((MainActivity) activity).onSectionAttached(
 				getArguments().getInt(ARG_SECTION_NUMBER));
 	}
 
 	@Override
-	public void onStop()
-	{
+	public void onStop() {
 		super.onStop();
 		mRequestQueue.cancelAll(this);
 	}

@@ -1,13 +1,11 @@
 apply plugin: 'android'
-apply plugin: 'android-apt'
-def AAVersion = '3.0.1'
 
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.2"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 8
         targetSdkVersion 18
         versionCode 1
         versionName "1.0"
@@ -20,58 +18,9 @@ android {
     }
 }
 
-apt {
-	arguments {
-		androidManifestFile variant.processResources.manifestFile
-		resourcePackageName 'com.hcsw.androidapplicationblocksample.app'
-
-		// If you're using Android NBS flavors you should use the following line instead of hard-coded packageName
-		// resourcePackageName android.defaultConfig.packageName
-
-		// You can set optional annotation processing options here, like these commented options:
-		// logLevel 'INFO'
-		// logFile '/var/log/aa.log'
-	}
-}
-
 dependencies {
     compile 'com.android.support:support-v4:+'
 	compile 'com.android.support:appcompat-v7:+'
 	compile 'com.google.code.gson:gson:+'
 	compile fileTree(dir: 'libs', include: ['*.jar'])
-	apt "org.androidannotations:androidannotations:$AAVersion"
-	compile "org.androidannotations:androidannotations-api:$AAVersion"
-
-
-}
-
-def getSourceSetName(variant) {
-	return new File(variant.dirName).getName();
-}
-
-android.applicationVariants.all { variant ->
-	def aptOutputDir = project.file("build/source/apt")
-	def aptOutput = new File(aptOutputDir, variant.dirName)
-	println "****************************"
-	println "variant: ${variant.name}"
-	println "manifest:  ${variant.processResources.manifestFile}"
-	println "aptOutput:  ${aptOutput}"
-	println "****************************"
-
-	android.sourceSets[getSourceSetName(variant)].java.srcDirs+= aptOutput.getPath()
-
-	variant.javaCompile.options.compilerArgs += [
-			'-processorpath', configurations.apt.getAsPath(),
-			'-AandroidManifestFile=' + variant.processResources.manifestFile,
-			'-AresourcePackageName=com.hcsw.androidapplicationblocksample.app',
-			'-s', aptOutput
-	]
-
-	variant.javaCompile.source = variant.javaCompile.source.filter { p ->
-		return !p.getPath().startsWith(aptOutputDir.getPath())
-	}
-
-	variant.javaCompile.doFirst {
-		aptOutput.mkdirs()
-	}
 }
