@@ -12,7 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.OnClick;
 
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -136,6 +140,11 @@ public class MainActivity extends ActionBarActivity
 			super.onAttach(activity);
 			((MainActivity) activity).onSectionAttached(
 					getArguments().getInt(ARG_SECTION_NUMBER));
+		}
+
+		@OnClick(R.id.btn_click_test)
+		public void clickTest(Button button) {
+			Toast.makeText(getActivity(), button.getText(), Toast.LENGTH_LONG).show();
 		}
 	}
 
