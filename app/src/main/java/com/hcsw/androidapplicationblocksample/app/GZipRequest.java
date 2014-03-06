@@ -40,8 +40,6 @@ public class GZipRequest extends StringRequest {
 			while ((read = in.readLine()) != null) {
 				output.append(read);
 			}
-			reader.close();
-			in.close();
 		} catch (IOException e) {
 			return Response.error(new ParseError());
 		} finally {
