@@ -1,7 +1,6 @@
 package com.hcsw.androidapplicationblocksample.app;
 
 import android.app.Application;
-import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 
 import org.slf4j.LoggerFactory;
@@ -41,7 +40,7 @@ public class MyApplication extends Application {
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 		context.reset();
 
-		final String LOG_DIR = ContextCompat.getExternalFilesDirs(this, Environment.DIRECTORY_DOCUMENTS)[0].toString();
+		final String LOG_DIR = ContextCompat.getExternalFilesDirs(this, null)[0].toString();
 
 		// setup LogcatAppender
 		PatternLayoutEncoder encoder2 = new PatternLayoutEncoder();
