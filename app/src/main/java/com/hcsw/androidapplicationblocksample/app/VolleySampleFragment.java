@@ -3,7 +3,6 @@ package com.hcsw.androidapplicationblocksample.app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by gwjang on 2014. 2. 27..
  */
 public class VolleySampleFragment extends Fragment {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(VolleySampleFragment.class);
+
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -62,7 +67,7 @@ public class VolleySampleFragment extends Fragment {
 						null,
 						new Response.Listener<SampleImage>() {
 							public void onResponse(SampleImage response) {
-								Log.i(TAG, response.getTitle());
+								LOGGER.info(response.getTitle());
 								//appendItemToList(response.items);
 								//notifyDataSetChanged();
 							}
@@ -70,10 +75,11 @@ public class VolleySampleFragment extends Fragment {
 						new Response.ErrorListener() {
 							@Override
 							public void onErrorResponse(VolleyError volleyError) {
-								Log.e(TAG, volleyError.getMessage(), volleyError);
+								LOGGER.error(volleyError.getMessage(), volleyError);
 							}
 						}
-				));
+				)
+		);
 
 		return rootView;
 	}
@@ -81,8 +87,7 @@ public class VolleySampleFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(
-				getArguments().getInt(ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
 	}
 
 	@Override

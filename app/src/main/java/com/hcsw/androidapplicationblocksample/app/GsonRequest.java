@@ -11,6 +11,9 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -18,6 +21,8 @@ import java.util.Map;
  * Volley adapter for JSON requests that will be parsed into Java objects by Gson.
  */
 public class GsonRequest<T> extends Request<T> {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GsonRequest.class);
+
 	private final Gson gson = new Gson();
 	private final Class<T> clazz;
 	private final Map<String, String> headers;
@@ -51,10 +56,11 @@ public class GsonRequest<T> extends Request<T> {
 	@Override
 	protected Response<T> parseNetworkResponse(NetworkResponse response) {
 		try {
-			String json = new String(
-					response.data, HttpHeaderParser.parseCharset(response.headers));
-			return Response.success(
-					gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
+			String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+
+			LOGGER.debug("NetworkResponse : " + json);
+
+			return Response.success(gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
 		} catch (JsonSyntaxException e) {
