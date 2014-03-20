@@ -2,7 +2,7 @@ package com.hcsw.androidapplicationblocksample.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by gwjang on 2014. 2. 27..
  */
-public class VolleySampleFragment extends Fragment {
+public class VolleySampleFragment extends BaseFragment {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VolleySampleFragment.class);
 
@@ -30,7 +30,6 @@ public class VolleySampleFragment extends Fragment {
 	 */
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private static final String SAMPLE_IMAGE_REQ_URL = "https://www.google.co.kr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&docid=q9RfPKKQqcn-sM&tbnid=7xa3QwEnvaHl0M:&ved=0CAUQjRw&url=http%3A%2F%2Fbarbeskumpe.com%2Fclassic_mac&ei=hUUOU6q4JITLkgXJk4DgAQ&bvm=bv.61965928,d.dGI&psig=AFQjCNHqFnTBjyoTmCFDn-h4QhC-IIEsJw&ust=1393530622523434";//"http://127.0.0.1:8000/images";
-	private static final String TAG = "VolleySampleFragment";
 
 	private RequestQueue mRequestQueue;
 	private ImageLoader mImageLoader;
@@ -51,8 +50,25 @@ public class VolleySampleFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		ActionBar.Tab tab = actionBar.newTab()
+				.setText("tab1")
+				.setTabListener(new VolleySampleTabListener<VolleySampleImageListFragment>(
+						getActivity(), "tab1", VolleySampleImageListFragment.class));
+		actionBar.addTab(tab);
+
+		tab = actionBar.newTab()
+				.setText("tab2")
+				.setTabListener(new VolleySampleTabListener<VolleySampleImageListFragment>(
+						getActivity(), "tab2", VolleySampleImageListFragment.class));
+		actionBar.addTab(tab);
+
+
 		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 		TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 		textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));

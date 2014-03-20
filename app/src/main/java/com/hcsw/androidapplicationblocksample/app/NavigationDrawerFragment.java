@@ -28,7 +28,7 @@ import android.widget.Toast;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends BaseFragment {
 
 	/**
 	 * Remember the position of the selected item.
@@ -261,10 +261,6 @@ public class NavigationDrawerFragment extends Fragment {
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setTitle(R.string.app_name);
-	}
-
-	private ActionBar getActionBar() {
-		return ((ActionBarActivity) getActivity()).getSupportActionBar();
 	}
 
 	/**
