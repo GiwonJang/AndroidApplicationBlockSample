@@ -20,6 +20,10 @@ import ch.qos.logback.core.util.StatusPrinter;
  */
 public class MyApplication extends Application {
 
+	static {
+		com.android.volley.VolleyLog.DEBUG = true;
+	}
+
 	public MyApplication() {
 	}
 
