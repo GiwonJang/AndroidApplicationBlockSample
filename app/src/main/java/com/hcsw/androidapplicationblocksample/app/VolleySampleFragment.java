@@ -53,7 +53,7 @@ public class VolleySampleFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		ActionBar actionBar = getActionBar();
+		/*ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ActionBar.Tab tab = actionBar.newTab()
@@ -66,7 +66,7 @@ public class VolleySampleFragment extends BaseFragment {
 				.setText("tab2")
 				.setTabListener(new VolleySampleTabListener<VolleySampleImageListFragment>(
 						getActivity(), "tab2", VolleySampleImageListFragment.class));
-		actionBar.addTab(tab);
+		actionBar.addTab(tab);*/
 
 
 		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
