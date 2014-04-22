@@ -3,6 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+	    <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
+	    <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>
+
+	<style name="Widget">
+	</style>
 
 </resources>

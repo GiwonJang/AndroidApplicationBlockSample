@@ -8,30 +8,29 @@ import java.util.List;
 
 /**
  * The <code>PagerAdapter</code> serves the fragments when paging.
+ *
  * @author mwho
  */
 public class VolleySamplePagerAdapter extends FragmentPagerAdapter {
 
+	private static final String[] CONTENT = new String[] { "Recent", "Artists", "Albums" };
 	private List<Fragment> fragments;
-	/**
-	 * @param fm
-	 * @param fragments
-	 */
+
 	public VolleySamplePagerAdapter(FragmentManager fm, List<Fragment> fragments) {
 		super(fm);
 		this.fragments = fragments;
 	}
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.FragmentPagerAdapter#getItem(int)
-	 */
+
+	@Override
+	public CharSequence getPageTitle(int position) {
+		return CONTENT[position % CONTENT.length].toUpperCase();
+	}
+
 	@Override
 	public Fragment getItem(int position) {
 		return this.fragments.get(position);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.support.v4.view.PagerAdapter#getCount()
-	 */
 	@Override
 	public int getCount() {
 		return this.fragments.size();
