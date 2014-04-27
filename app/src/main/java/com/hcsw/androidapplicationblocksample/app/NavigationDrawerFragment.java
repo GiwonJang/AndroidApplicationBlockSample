@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -240,6 +241,15 @@ public class NavigationDrawerFragment extends BaseFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item != null && item.getItemId() == android.R.id.home) {
+			if (mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+				mDrawerLayout.closeDrawer(Gravity.RIGHT);
+			} else {
+				mDrawerLayout.openDrawer(Gravity.RIGHT);
+			}
+			return true;
+		}
+
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}

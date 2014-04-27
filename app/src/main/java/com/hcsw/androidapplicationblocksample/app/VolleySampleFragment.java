@@ -2,20 +2,21 @@ package com.hcsw.androidapplicationblocksample.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
+import com.viewpagerindicator.TabPageIndicator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by gwjang on 2014. 2. 27..
@@ -23,6 +24,8 @@ import org.slf4j.LoggerFactory;
 public class VolleySampleFragment extends BaseFragment {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VolleySampleFragment.class);
+	private ViewPager mViewPager;
+	private VolleySamplePagerAdapter mPagerAdapter;
 
 	/**
 	 * The fragment argument representing the section number for this
@@ -53,24 +56,40 @@ public class VolleySampleFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		View rootView = inflater.inflate(R.layout.fragment_main_volley, container, false);
 
-		ActionBar.Tab tab = actionBar.newTab()
-				.setText("tab1")
-				.setTabListener(new VolleySampleTabListener<VolleySampleImageListFragment>(
-						getActivity(), "tab1", VolleySampleImageListFragment.class));
-		actionBar.addTab(tab);
+		List<Fragment> fragments = new Vector<Fragment>();
+		fragments.add(Fragment.instantiate(getActivity(), VolleySampleImageListFragment.class.getName()));
+		fragments.add(Fragment.instantiate(getActivity(), VolleySampleImageListFragment.class.getName()));
+		fragments.add(Fragment.instantiate(getActivity(), VolleySampleImageListFragment.class.getName()));
 
-		tab = actionBar.newTab()
-				.setText("tab2")
-				.setTabListener(new VolleySampleTabListener<VolleySampleImageListFragment>(
-						getActivity(), "tab2", VolleySampleImageListFragment.class));
-		actionBar.addTab(tab);
+		mPagerAdapter = new VolleySamplePagerAdapter(getActivity().getSupportFragmentManager(), fragments);
+		mViewPager = (ViewPager) rootView.findViewById(R.id.vp_pager);
+		mViewPager.setAdapter(mPagerAdapter);
+
+		//Bind the title indicator to the adapter
+		TabPageIndicator tabPagerIndicator = (TabPageIndicator) rootView.findViewById(R.id.vpi_indicator);
+		tabPagerIndicator.setViewPager(mViewPager);
+		tabPagerIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+
+			}
+		});
 
 
-		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-		TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+
+		/*TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 		textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 
 		mRequestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -95,7 +114,7 @@ public class VolleySampleFragment extends BaseFragment {
 							}
 						}
 				)
-		);
+		);*/
 
 		return rootView;
 	}
@@ -109,6 +128,6 @@ public class VolleySampleFragment extends BaseFragment {
 	@Override
 	public void onStop() {
 		super.onStop();
-		mRequestQueue.cancelAll(this);
+		//mRequestQueue.cancelAll(this);
 	}
 }
