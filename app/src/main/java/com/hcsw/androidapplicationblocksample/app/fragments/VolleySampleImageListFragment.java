@@ -1,27 +1,11 @@
-package com.hcsw.androidapplicationblocksample.app;
+package com.hcsw.androidapplicationblocksample.app.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
-import com.viewpagerindicator.TabPageIndicator;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Vector;
+import com.hcsw.androidapplicationblocksample.app.R;
 
 /**
  * Created by gwjang on 2014. 3. 20..

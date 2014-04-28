@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hcsw.androidapplicationblocksample.app.fragments.VolleySampleFragment;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -142,14 +144,14 @@ public class MainActivity extends ActionBarActivity
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 			ButterKnife.inject(this, rootView);
-			mSectionLabel.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+			//mSectionLabel.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 			return rootView;
 		}
 
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
-			((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+			//((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
 		}
 
 		@OnClick(R.id.btn_click_test)

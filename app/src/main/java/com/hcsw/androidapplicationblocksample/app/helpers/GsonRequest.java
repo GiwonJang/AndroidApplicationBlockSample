@@ -1,4 +1,4 @@
-package com.hcsw.androidapplicationblocksample.app;
+package com.hcsw.androidapplicationblocksample.app.helpers;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;

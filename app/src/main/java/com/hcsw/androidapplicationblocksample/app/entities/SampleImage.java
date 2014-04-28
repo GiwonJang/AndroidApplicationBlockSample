@@ -1,4 +1,4 @@
-package com.hcsw.androidapplicationblocksample.app;
+package com.hcsw.androidapplicationblocksample.app.entities;
 
 /**
  * Created by gwjang on 2014. 2. 27..

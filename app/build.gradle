@@ -28,5 +28,4 @@ dependencies {
 	compile 'com.github.tony19:logback-android-core:+'
 	compile 'com.github.tony19:logback-android-classic:+'
 	compile 'org.slf4j:slf4j-api:1.7.6'
-	//compile project(':ViewPagerIndicator')
 }

@@ -1,4 +1,4 @@
-package com.hcsw.androidapplicationblocksample.app;
+package com.hcsw.androidapplicationblocksample.app.fragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
