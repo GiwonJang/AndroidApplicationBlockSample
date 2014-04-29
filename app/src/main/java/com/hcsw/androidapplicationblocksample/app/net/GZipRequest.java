@@ -1,4 +1,4 @@
-package com.hcsw.androidapplicationblocksample.app.helpers;
+package com.hcsw.androidapplicationblocksample.app.net;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;

@@ -1,7 +1,10 @@
 package com.hcsw.androidapplicationblocksample.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import org.slf4j.LoggerFactory;
 
@@ -20,11 +23,31 @@ import ch.qos.logback.core.util.StatusPrinter;
  */
 public class MyApplication extends Application {
 
+	private static MyApplication instance;
+
 	static {
 		com.android.volley.VolleyLog.DEBUG = true;
 	}
 
 	public MyApplication() {
+		instance = this;
+	}
+
+	/**
+	 * @return the main context of the Application
+	 */
+	public static Context getAppContext()
+	{
+		return instance;
+	}
+
+	/**
+	 * @return the main resources from the Application
+	 */
+	public static Resources getAppResources()
+	{
+		if(instance == null) return null;
+		return instance.getResources();
 	}
 
 	@Override
@@ -36,6 +59,17 @@ public class MyApplication extends Application {
 		//initSingletons();
 
 		configureLogbackDirectly();
+	}
+
+	/**
+	 * Called when the overall system is running low on memory
+	 */
+	@Override
+	public void onLowMemory() {
+		super.onLowMemory();
+		//Log.w(TAG, "System is running low on memory");
+
+		//BitmapCache.getInstance().clear();
 	}
 
 	private void configureLogbackDirectly() {

@@ -1,4 +1,4 @@
-package com.hcsw.androidapplicationblocksample.app.helpers;
+package com.hcsw.androidapplicationblocksample.app.net;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -27,6 +28,7 @@ public class GsonRequest<T> extends Request<T> {
 	private final Class<T> clazz;
 	private final Map<String, String> headers;
 	private final Listener<T> listener;
+	private final Map<String, String> requestParams = new HashMap<String, String>();
 
 	/**
 	 * Make a GET request and return a parsed object from JSON.
@@ -35,17 +37,24 @@ public class GsonRequest<T> extends Request<T> {
 	 * @param clazz Relevant class object, for Gson's reflection
 	 * @param headers Map of request headers
 	 */
-	public GsonRequest(String url, Class<T> clazz, Map<String, String> headers,
+	public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, String> requestParams,
 	                   Listener<T> listener, ErrorListener errorListener) {
-		super(Method.GET, url, errorListener);
+		super(method, url, errorListener);
 		this.clazz = clazz;
 		this.headers = headers;
 		this.listener = listener;
+		if (requestParams != null)
+			this.requestParams.putAll(requestParams);
 	}
 
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
 		return headers != null ? headers : super.getHeaders();
+	}
+
+	@Override
+	public Map<String, String> getParams() {
+		return requestParams.size() > 0 ? requestParams : null;
 	}
 
 	@Override
